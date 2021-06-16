@@ -273,7 +273,9 @@ void Create_Account(T &vec){ // Create user Account
 	cout<<"\t Enter Cnic Number _ ";
 	do{
 	   cin>>cnic_num;
-	}while(cnic_num.length()!=len && Find_DuplicateCnicNum(vec.begin(),vec.end(),stoll(cnic_num)));
+	   if(cnic_num.length()!=len) 
+	      cout<<"\t Cnic Must Have 16 Digits : ";
+	}while((cnic_num.length()!=len) or Find_DuplicateCnicNum(vec.begin(),vec.end(),stoll(cnic_num)));
 	ll acc_num =Create_AccountNumber(vec);// Account Number
 	ll card_num = Create_CardNumber(vec);// Card Number
 	cout<<"\t Enter Date of Birth"<<endl;
@@ -284,8 +286,11 @@ void Create_Account(T &vec){ // Create user Account
 	cin>>choice; 
 	bool type = (choice == 'S' || choice =='s') ? true :false;
 	cout<<"\tEnter Amount (Amount Must be Greater then 1000) _ ";
-	cin>>amount;
-	if(amount >= intailamount ){
+	do{
+		cin>>amount;
+		if(amount <intailamount)
+		   cout<<"\t Amount is Low ENter More then 1000 : ";
+	}while(amount <intailamount);
 		UserData obj(name,last_name,address);
 		obj.set_account_num(acc_num);// Set Account Number
 	    obj.set_cell_num(stoll(phoneno));// Cell Number
@@ -298,8 +303,6 @@ void Create_Account(T &vec){ // Create user Account
 	    cout<<"\t\t--Account Created SucessFully--"<<endl;
 	    cout<<"\t Account Number : "<<acc_num<<endl;
 	    cout<<"\t Credit Card Has been Issued : "<<card_num<<endl;
-	} else cout<<"\t !!Amount is Too low "<<endl;
-	
 }
 
 // Deposit_Money via check book
